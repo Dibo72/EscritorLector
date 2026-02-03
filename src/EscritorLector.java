@@ -1,15 +1,38 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.util.ArrayList;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class EscritorLector {
+    public static void main(String[] args) {
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.add("El sol salió temprano y llenó la mañana de luz." + "\n" +
+
+                "A veces el silencio dice más que mil palabras." + "\n" +
+
+                "Aprender algo nuevo cambia la forma de ver el mundo." + "\n" +
+
+                "Un café caliente puede arreglar un día complicado." + "\n" +
+
+                "Los pequeños detalles suelen marcar la diferencia.");
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("archivo.txt"))) {
+            for (String linea : lista) {
+                escritor.write(linea);
+                escritor.newLine();
+            }
+        }catch(Exception e){
+            System.out.println(e);
         }
+
+        try(BufferedReader lector = new BufferedReader(new FileReader("archivo.txt"))){
+            String line;
+            while ((line = lector.readLine()) != null){
+                System.out.println(line);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
     }
 }
